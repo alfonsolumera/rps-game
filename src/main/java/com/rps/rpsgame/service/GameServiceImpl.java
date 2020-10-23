@@ -14,6 +14,10 @@ public class GameServiceImpl implements GameService {
   @Override
   public List<Player> playRound(Player p1, Player p2) {
 
+    if (null == p1.getHistoryMatches() && p1.getHistoryMatches().isEmpty()){
+      p1.setHistoryMatches(new ArrayList<>());
+    }
+
     List<Player> game = new ArrayList<>();
     String scoreP1;
     String scoreP2;
