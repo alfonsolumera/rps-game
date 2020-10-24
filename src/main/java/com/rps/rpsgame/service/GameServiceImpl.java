@@ -1,8 +1,12 @@
 package com.rps.rpsgame.service;
 
+import com.rps.rpsgame.model.OptionsModel;
 import com.rps.rpsgame.model.Player;
+import com.rps.rpsgame.model.SummaryRound;
+import com.rps.rpsgame.model.SummaryRounds;
 import com.rps.rpsgame.utils.Constants;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,31 +16,23 @@ import java.util.List;
 public class GameServiceImpl implements GameService {
 
   @Override
-  public List<Player> playRound(Player p1, Player p2) {
-
-    if (null == p1.getHistoryMatches() && p1.getHistoryMatches().isEmpty()){
-      p1.setHistoryMatches(new ArrayList<>());
-    }
-
-    List<Player> game = new ArrayList<>();
-    String scoreP1;
-    String scoreP2;
-    boolean tie = p1.getOption() == p2.getOption();
-
-    if (!tie) {
-      scoreP1 = p1.getOption() == Constants.PAPER ? Constants.WINNER : Constants.LOOSER;
-      scoreP2 = Constants.WINNER.equals(scoreP1) ? Constants.LOOSER : Constants.WINNER;
+  public SummaryRounds playRound(SummaryRounds summary, Player p1, Player p2) {
+    List<SummaryRound> round = new ArrayList();
+    if (p1.getChoise().equals(p2.getChoise())) {
+      round.add(new SummaryRound(p1.getChoise(), p2.getChoise(), Constants.EMPTY));
+    } else if (p1.getChoise().equals(OptionsModel.PAPEL)) {
+      round.add(new SummaryRound(p1.getChoise(), p2.getChoise(), p1.getName()));
     } else {
-      scoreP1 = Constants.TIE;
-      scoreP2 = Constants.TIE;
+      round.add(new SummaryRound(p1.getChoise(), p2.getChoise(), p2.getName()));
     }
 
-    p1.getHistoryMatches().add(scoreP1);
-    p2.getHistoryMatches().add(scoreP2);
+    if (CollectionUtils.isEmpty(summary.getRounds())) {
+      summary.setRounds(round);
+    } else {
+      summary.getRounds().addAll(round);
+    }
 
-    game.add(p1);
-    game.add(p2);
-
-    return game;
+    return summary;
   }
+
 }
