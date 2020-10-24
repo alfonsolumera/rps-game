@@ -16,8 +16,13 @@ import java.util.List;
 public class GameServiceImpl implements GameService {
 
   @Override
-  public SummaryRounds playRound(SummaryRounds summary, Player p1, Player p2) {
+  public SummaryRounds playRound(SummaryRounds summary) {
     List<SummaryRound> round = new ArrayList();
+
+    Player p1 = Player.builder().name("PLAYER 1").choise(OptionsModel.randomOption()).build();
+    Player p2 = Player.builder().name("PLAYER 2").choise(OptionsModel.PIEDRA)
+        .historyMatches(new ArrayList<>()).build();
+
     if (p1.getChoise().equals(p2.getChoise())) {
       round.add(new SummaryRound(p1.getChoise(), p2.getChoise(), Constants.EMPTY));
     } else if (p1.getChoise().equals(OptionsModel.PAPEL)) {
