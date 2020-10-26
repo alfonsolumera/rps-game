@@ -24,9 +24,10 @@
 	<div class="container">
 		<form method="post" th:object="${rounds}" class="mt-5">
 
-			<div class="bottom">
-				<button class="btn btn-primary" type="submit">¡Jugar ronda!</button>
-			</div>
+			<p th:if="${rounds != null}" th:text="' Rounds played: ' + ${rounds.size} '.'"></p>
+			<p th:if="${rounds == null}" th:text="' Rounds played: 0.'"></p>
+
+			<a class="btn btn-primary" th:href="@{/index/play}">¡Play!</a>
 
 			<div class="container">
 				<div th:if="${rounds != null}">
@@ -57,9 +58,11 @@
 			</div>
 
 		</form>
+
+		<form method="get" th:object="${rounds}" class="mt-5">
+			<a class="btn btn-primary" th:href="@{/index/reset}">Reset</a>
+		</form>
 	</div>
-
-
 
 	<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
 	<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>

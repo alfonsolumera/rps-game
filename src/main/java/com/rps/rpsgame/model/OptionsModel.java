@@ -5,7 +5,7 @@ import java.util.Random;
 public enum OptionsModel {
 
 
-  PIEDRA, PAPEL, TIJERA;
+  ROCK, PAPER, SCISSOR;
 
   public static OptionsModel randomOption() {
     int pick = new Random().nextInt(OptionsModel.values().length);

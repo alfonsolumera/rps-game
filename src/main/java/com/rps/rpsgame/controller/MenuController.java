@@ -25,12 +25,20 @@ public class MenuController {
     return "index";
   }
 
-  @PostMapping
+  @PostMapping(value = "/play")
   public String save(@ModelAttribute SummaryRounds rounds, Model model) {
 
     SummaryRounds lstScored = gameService.playRound(rounds);
 
     model.addAttribute("rounds", lstScored);
-    return "index";
+    return "redirect:/index";
   }
+
+  @GetMapping(value = "/reset")
+  public String reset(@ModelAttribute SummaryRounds rounds, Model model) {
+
+    model.addAttribute("rounds", new SummaryRounds());
+    return "redirect:/index";
+  }
+
 }

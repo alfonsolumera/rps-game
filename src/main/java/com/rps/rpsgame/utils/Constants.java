@@ -2,7 +2,7 @@ package com.rps.rpsgame.utils;
 
 public class Constants {
 
-  public static final String EMPTY = "EMPTY";
+  public static final String TIE = "TIE";
 
 
 }

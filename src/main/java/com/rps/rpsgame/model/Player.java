@@ -14,7 +14,7 @@ import java.util.List;
 public class Player {
 
   private String name;
-  private OptionsModel choise;
+  private OptionsModel choice;
   private int option;
   private List<String> historyMatches;
 
