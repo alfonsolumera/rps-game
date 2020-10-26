@@ -26,7 +26,7 @@ public class MenuController {
   }
 
   @PostMapping(value = "/play")
-  public String save(@ModelAttribute SummaryRounds rounds, Model model) {
+  public String play(@ModelAttribute SummaryRounds rounds, Model model) {
 
     SummaryRounds lstScored = gameService.playRound(rounds);
 
