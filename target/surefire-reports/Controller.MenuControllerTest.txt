@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: Controller.MenuControllerTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 3.393 s <<< FAILURE! - in Controller.MenuControllerTest
+reset_OK  Time elapsed: 0.009 s  <<< ERROR!
+java.lang.NullPointerException
+	at Controller.MenuControllerTest.reset_OK(MenuControllerTest.java:62)
+
