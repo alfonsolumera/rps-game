@@ -1,9 +1,12 @@
 package com.rps.rpsgame.service;
 
-import com.rps.rpsgame.model.SummaryRounds;
+import com.rps.rpsgame.model.SummaryRound;
+
+import java.util.List;
 
 public interface GameService {
 
-  SummaryRounds playRound(SummaryRounds summary);
+  List<SummaryRound> playRound(List<SummaryRound> previousRounds);
+
 
 }

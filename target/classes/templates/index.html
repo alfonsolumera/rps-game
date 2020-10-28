@@ -22,45 +22,46 @@
 	</nav>
 
 	<div class="container">
-		<form method="post" th:object="${rounds}" class="mt-5">
-
-			<div class="bottom">
-				<button class="btn btn-primary" type="submit">¡Jugar ronda!</button>
+	<p
+				th:text="'Rounds played: ' + ${#session.getAttribute('roundsPlayed')}"></p>
+		<div class="row">
+			<div class="col-2">
+			
+				<a class="btn btn-primary" th:href="@{/index/play}">¡Play!</a>
 			</div>
-
-			<div class="container">
-				<div th:if="${rounds != null}">
-					<div class="row col-md-7 table-responsive">
-						<h1>Summary</h1>
-						<table id="customerTable" class="table">
-							<thead>
-								<tr>
-									<th scope="col">Player 1</th>
-									<th scope="col">Player 2</th>
-									<th scope="col">Winner</th>
-								</tr>
-							</thead>
-							<tbody>
-
-								<tr th:each="round, itemStat : *{rounds}">
-									<td><input class="border-0" readonly
-										th:field="*{rounds[__${itemStat.index}__].player1}" /></td>
-									<td><input class="border-0" readonly
-										th:field="*{rounds[__${itemStat.index}__].player2}" /></td>
-									<td><input class="border-0" readonly
-										th:field="*{rounds[__${itemStat.index}__].name}" /></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
+			<div class="col-10">
+			
+				<a class="btn btn-primary" th:href="@{/index/reset}">¡RESET!</a>
 			</div>
-
-		</form>
+		</div>
 	</div>
 
-
-
+	<div class="container">
+		<form method="post" th:action="@{/}" th:object="${rounds}"
+			class="mt-5">
+			<span th:if="${#session.getAttribute('rounds') != null}"></span>
+			<div class="row col-md-7 table-responsive">
+				<h1>Summary</h1>
+				<table id="customerTable" class="table">
+					<thead>
+						<tr>
+							<th scope="col">Player 1</th>
+							<th scope="col">Player 2</th>
+							<th scope="col">Winner</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="round,iterStat : ${#session.getAttribute('rounds')}"
+							th:class="${iterStat.odd}? 'odd'">
+							<td th:text="${round.player1}"></td>
+							<td th:text="${round.player2}"></td>
+							<td th:text="${round.name}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</form>
+	</div>
 	<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
 	<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
 	<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>

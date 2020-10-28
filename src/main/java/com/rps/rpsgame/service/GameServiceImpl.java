@@ -1,22 +1,21 @@
 package com.rps.rpsgame.service;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.rps.rpsgame.model.OptionsModel;
+import com.rps.rpsgame.model.Player;
+import com.rps.rpsgame.model.SummaryRound;
+import com.rps.rpsgame.utils.Constants;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 
-import com.rps.rpsgame.model.OptionsModel;
-import com.rps.rpsgame.model.Player;
-import com.rps.rpsgame.model.SummaryRound;
-import com.rps.rpsgame.model.SummaryRounds;
-import com.rps.rpsgame.utils.Constants;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class GameServiceImpl implements GameService {
 
   @Override
-  public SummaryRounds playRound(SummaryRounds summary) {
+  public List<SummaryRound> playRound(List<SummaryRound> summary) {
     List<SummaryRound> round = new ArrayList();
 
     Player p1 = Player.builder().name("PLAYER 1").choice(OptionsModel.randomOption()).build();
@@ -31,10 +30,10 @@ public class GameServiceImpl implements GameService {
       round.add(new SummaryRound(p1.getChoice(), p2.getChoice(), p2.getName()));
     }
 
-    if (CollectionUtils.isEmpty(summary.getRounds())) {
-      summary.setRounds(round);
+    if (CollectionUtils.isEmpty(summary)) {
+      summary = round;
     } else {
-      summary.getRounds().addAll(round);
+      summary.addAll(round);
     }
 
     return summary;
