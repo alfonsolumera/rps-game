@@ -41,11 +41,6 @@ public class MenuControllerTest {
     @BeforeEach
     public void doSomething() throws Exception {
         model = new ConcurrentModel();
-    }
-
-    @BeforeEach
-    public void setUp(){
-//        model = new Model();
         summaryRounds = new SummaryRounds();
     }
 
@@ -64,7 +59,7 @@ public class MenuControllerTest {
     @Test
     public void reset_OK(){
 
-        String result = menuController.reset(this.summaryRounds, this.model);
+        String result = menuController.reset(this.summaryRounds, this.model, null);
 
         assert EXPECTED_VIEW.equals(result);
 

@@ -22,12 +22,21 @@
 	</nav>
 
 	<div class="container">
-		<form method="post" th:object="${rounds}" class="mt-5">
+		<form method="post" th:action="@{/}" th:object="${rounds}" class="mt-5">
 
-			<p th:if="${rounds != null}" th:text="' Rounds played: ' + ${rounds.size} '.'"></p>
-			<p th:if="${rounds == null}" th:text="' Rounds played: 0.'"></p>
+			<p th:text="'Rounds played: ' + ${#session.getAttribute('roundsPlayed')}"></p>
 
 			<a class="btn btn-primary" th:href="@{/index/play}">¡Play!</a>
+			<!--<div class="bottom">
+				<button class="btn btn-primary" type="submit">¡Play!</button>
+			</div>-->
+
+			<p th:text="hola" ></p>
+<!--			<p th:text="${#session.getAttribute('scoreBoard')}" ></p>-->
+			<p th:text="${scoreBoard}" ></p>
+			<p th:text="${rounds}" ></p>
+			<p th:field="${rounds}" ></p>
+
 
 			<div class="container">
 				<div th:if="${rounds != null}">
@@ -43,14 +52,22 @@
 							</thead>
 							<tbody>
 
-								<tr th:each="round, itemStat : *{rounds}">
+								<!--<tr th:each="round, itemStat : *{#session.getAttribute('scoreBoard')}">
 									<td><input class="border-0" readonly
 										th:field="*{rounds[__${itemStat.index}__].player1}" /></td>
 									<td><input class="border-0" readonly
 										th:field="*{rounds[__${itemStat.index}__].player2}" /></td>
 									<td><input class="border-0" readonly
 										th:field="*{rounds[__${itemStat.index}__].name}" /></td>
-								</tr>
+								</tr>-->
+								<!--<tr th:each="round, itemStat : *{rounds}">
+									<td><input class="border-0" readonly
+											   th:field="*{rounds[__${itemStat.index}__].player1}" /></td>
+									<td><input class="border-0" readonly
+											   th:field="*{rounds[__${itemStat.index}__].player2}" /></td>
+									<td><input class="border-0" readonly
+											   th:field="*{rounds[__${itemStat.index}__].name}" /></td>
+								</tr>-->
 							</tbody>
 						</table>
 					</div>
