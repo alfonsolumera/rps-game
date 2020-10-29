@@ -9,7 +9,7 @@ public interface GameService {
 
   List<SummaryRound> playRound(List<SummaryRound> previousRounds);
 
-  void saveGameSummary(List<SummaryRound> previousRounds, String totalRounds);
+  void saveGameSummary(List<SummaryRound> previousRounds);
 
   GameSummary getSummary();
 

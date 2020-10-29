@@ -50,22 +50,27 @@ public class GameServiceImpl implements GameService {
   }
 
   @Override
-  public void saveGameSummary(List<SummaryRound> previousRounds, String totalRounds) {
+  public void saveGameSummary(List<SummaryRound> previousRounds) {
 
-    Map<SummaryRound, Long> ocurrencias = previousRounds.stream()
-        .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+    if (CollectionUtils.isNotEmpty(previousRounds)) {
 
-    this.gameSummary.setTotalWinsOnePlayer(
-        ocurrencias.entrySet().stream().filter(s -> CTE_PLAYER_1.equals(s.getKey().getName()))
-            .findFirst().map(Map.Entry::getValue).orElse((long) 0));
-    this.gameSummary.setTotalWinsSecondPlayer(
-        ocurrencias.entrySet().stream().filter(s -> CTE_PLAYER_2.equals(s.getKey().getName()))
-            .findFirst().map(Map.Entry::getValue).orElse((long) 0));
-    this.gameSummary.setTotalDraws(
-        ocurrencias.entrySet().stream().filter(s -> CTE_TIE.equals(s.getKey().getName()))
-            .findFirst().map(Map.Entry::getValue).orElse((long) 0));
-    this.gameSummary
-        .setTotalRounds(this.gameSummary.getTotalRounds() + Integer.valueOf(totalRounds));
+      Map<SummaryRound, Long> ocurrencias = previousRounds.stream()
+          .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+      this.gameSummary.setTotalWinsOnePlayer(
+          ocurrencias.entrySet().stream().filter(s -> CTE_PLAYER_1.equals(s.getKey().getName()))
+              .findFirst().map(Map.Entry::getValue).orElse((long) 0));
+      this.gameSummary.setTotalWinsSecondPlayer(
+          ocurrencias.entrySet().stream().filter(s -> CTE_PLAYER_2.equals(s.getKey().getName()))
+              .findFirst().map(Map.Entry::getValue).orElse((long) 0));
+      this.gameSummary.setTotalDraws(
+          ocurrencias.entrySet().stream().filter(s -> CTE_TIE.equals(s.getKey().getName()))
+              .findFirst().map(Map.Entry::getValue).orElse((long) 0));
+      this.gameSummary.setTotalRounds(this.gameSummary.getTotalDraws()
+          + this.gameSummary.getTotalWinsOnePlayer() + this.gameSummary.getTotalWinsSecondPlayer());
+    }
+
+
 
   }
 
