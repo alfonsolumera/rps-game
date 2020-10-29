@@ -26,13 +26,15 @@
 				th:text="'Rounds played: ' + ${#session.getAttribute('roundsPlayed')}"></p>
 		<div class="row">
 			<div class="col-2">
-			
 				<a class="btn btn-primary" th:href="@{/index/play}">¡Play!</a>
 			</div>
-			<div class="col-10">
-			
+			<div class="col-2">
+				<a class="btn btn-primary" th:href="@{/index/game-summary}">Summary</a>
+			</div>
+			<div class="col-2">
 				<a class="btn btn-primary" th:href="@{/index/reset}">¡RESET!</a>
 			</div>
+			
 		</div>
 	</div>
 
