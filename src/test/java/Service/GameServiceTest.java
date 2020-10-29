@@ -5,19 +5,17 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import com.rps.rpsgame.model.GameSummary;
 import com.rps.rpsgame.model.OptionsModel;
 import com.rps.rpsgame.model.SummaryRound;
-import com.rps.rpsgame.model.SummaryRounds;
 import com.rps.rpsgame.service.GameService;
 import com.rps.rpsgame.service.GameServiceImpl;
+import com.rps.rpsgame.utils.Constants;
 
 @SpringBootApplication
 @SpringBootTest
@@ -36,24 +34,55 @@ public class GameServiceTest {
     @Test
     public void playRound() {
 
-        SummaryRounds result = spy.playRound(fillSummaryRounds(new SummaryRounds()));
+        List<SummaryRound> result = spy.playRound(fillSummaryRounds());
 
         assert result != null;
-        assert !result.getRounds().isEmpty();
-        assert OptionsModel.ROCK.equals(result.getRounds().get(0).getPlayer2());
+        assert !result.isEmpty();
+        assert OptionsModel.ROCK.equals(result.get(0).getPlayer2());
+    }
+
+    @Test
+    public void playRound1() {
+
+        List<SummaryRound> result = spy.playRound(null);
+
+        assert result != null;
+        assert !result.isEmpty();
+        assert OptionsModel.ROCK.equals(result.get(0).getPlayer2());
+    }
+
+    @Test
+    public void playRound2() {
+
+        List<SummaryRound> result = spy.playRound(fillSummaryRounds());
+
+        assert result != null;
+        assert !result.isEmpty();
+        assert OptionsModel.ROCK.equals(result.get(0).getPlayer2());
+    }
+
+    @Test
+    public void summary() {
+
+        GameSummary result = spy.getSummary();
+
+        assert result != null;
 
     }
 
-    private SummaryRounds fillSummaryRounds (SummaryRounds totalRounds){
+    private List<SummaryRound> fillSummaryRounds (){
 
-        SummaryRound round1 = SummaryRound.builder().player1(OptionsModel.randomOption()).player2(OptionsModel.ROCK).name("Player1").build();
-        SummaryRound round2 = SummaryRound.builder().player1(OptionsModel.randomOption()).player2(OptionsModel.ROCK).name("Player2").build();
         List<SummaryRound> rounds = new ArrayList<>();
+
+        SummaryRound round1 = SummaryRound.builder().player1(OptionsModel.PAPER).player2(OptionsModel.ROCK).name(Constants.PLAYER_ONE).build();
+        SummaryRound round2 = SummaryRound.builder().player1(OptionsModel.ROCK).player2(OptionsModel.ROCK).name(Constants.TIE).build();
+        SummaryRound round3 = SummaryRound.builder().player1(OptionsModel.SCISSOR).player2(OptionsModel.ROCK).name(Constants.PLAYER_TWO).build();
+
         rounds.add(round1);
         rounds.add(round2);
-        totalRounds.setRounds(rounds);
+        rounds.add(round3);
 
-        return totalRounds;
+        return rounds;
     }
 
 }

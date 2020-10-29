@@ -1,13 +1,15 @@
 package com.rps.rpsgame.model;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class GameSummary {
 
-  private long totalRounds;
-  private long totalWinsOnePlayer;
-  private long totalWinsSecondPlayer;
-  private long totalDraws;
+  private int totalRounds;
+  private int totalWinsPlayerOne;
+  private int totalWinsPlayerTwo;
+  private int totalDraws;
 
 }

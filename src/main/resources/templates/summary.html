@@ -23,8 +23,7 @@
 	<div class="container">
 		<div  class="row mt-5">
 			<div class="col-2">
-				<a class="btn btn-primary" th:href="@{/}">¡Return
-					Play!</a>
+				<a class="btn btn-primary" th:href="@{/}">Back</a>
 			</div>
 		</div>
 		<div class="mt-5 row col-md-7 table-responsive">
@@ -33,16 +32,16 @@
 				<thead>
 					<tr>
 						<th scope="col">Total Rounds</th>
-						<th scope="col">Win Player 1</th>
-						<th scope="col">Win Player 2</th>
+						<th scope="col">Wins Player 1</th>
+						<th scope="col">Wins Player 2</th>
 						<th scope="col">Draws</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="score: ${#session.getAttribute('gameSummary')}">
 						<td th:text="${score.totalRounds}"></td>
-						<td th:text="${score.totalWinsOnePlayer}"></td>
-						<td th:text="${score.totalWinsSecondPlayer}"></td>
+						<td th:text="${score.totalWinsPlayerOne}"></td>
+						<td th:text="${score.totalWinsPlayerTwo}"></td>
 						<td th:text="${score.totalDraws}"></td>
 					</tr>
 				</tbody>

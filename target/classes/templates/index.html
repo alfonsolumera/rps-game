@@ -26,10 +26,10 @@
 				<a class="btn btn-primary" th:href="@{/play}">¡Play!</a>
 			</div>
 			<div class="col-2">
-				<a class="btn btn-primary" th:href="@{/game-summary}">Summary</a>
+				<a class="btn btn-primary" th:href="@{/game-summary}">Score Board</a>
 			</div>
 			<div class="col-2">
-				<a class="btn btn-primary" th:href="@{/reset}">Save/Reset</a>
+				<a class="btn btn-primary" th:href="@{/reset}">Reset</a>
 			</div>
 		</div>
 		<h4 class="mt-5"
@@ -49,8 +49,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="round,iterStat : ${#session.getAttribute('rounds')}"
-							th:class="${iterStat.odd}? 'odd'">
+						<tr th:each="round,iterStat : ${#session.getAttribute('rounds')}">
 							<td th:text="${round.player1}"></td>
 							<td th:text="${round.player2}"></td>
 							<td th:text="${round.name}"></td>
