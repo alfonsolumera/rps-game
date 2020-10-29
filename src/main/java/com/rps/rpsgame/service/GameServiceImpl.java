@@ -25,7 +25,7 @@ public class GameServiceImpl implements GameService {
 
   @Override
   public List<SummaryRound> playRound(List<SummaryRound> summary) {
-    List<SummaryRound> round = new ArrayList();
+    List<SummaryRound> round = new ArrayList<SummaryRound>();
 
     Player p1 = Player.builder().name(CTE_PLAYER_1).choice(OptionsModel.randomOption()).build();
     Player p2 = Player.builder().name(CTE_PLAYER_2).choice(OptionsModel.ROCK)
