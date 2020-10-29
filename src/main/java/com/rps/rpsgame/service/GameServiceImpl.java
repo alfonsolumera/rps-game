@@ -1,5 +1,6 @@
 package com.rps.rpsgame.service;
 
+import com.rps.rpsgame.model.GameSummary;
 import com.rps.rpsgame.model.OptionsModel;
 import com.rps.rpsgame.model.Player;
 import com.rps.rpsgame.model.SummaryRound;
@@ -10,16 +11,24 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 public class GameServiceImpl implements GameService {
 
+  private static final String CTE_PLAYER_1 = "PLAYER 1";
+  private static final String CTE_PLAYER_2 = "PLAYER 2";
+  private static final String CTE_TIE = "TIE";
+  private GameSummary gameSummary = new GameSummary();
+
   @Override
   public List<SummaryRound> playRound(List<SummaryRound> summary) {
-    List<SummaryRound> round = new ArrayList();
+    List<SummaryRound> round = new ArrayList<SummaryRound>();
 
-    Player p1 = Player.builder().name("PLAYER 1").choice(OptionsModel.randomOption()).build();
-    Player p2 = Player.builder().name("PLAYER 2").choice(OptionsModel.ROCK)
+    Player p1 = Player.builder().name(CTE_PLAYER_1).choice(OptionsModel.randomOption()).build();
+    Player p2 = Player.builder().name(CTE_PLAYER_2).choice(OptionsModel.ROCK)
         .historyMatches(new ArrayList<>()).build();
 
     if (p1.getChoice().equals(p2.getChoice())) {
@@ -31,12 +40,39 @@ public class GameServiceImpl implements GameService {
     }
 
     if (CollectionUtils.isEmpty(summary)) {
-      summary = round;
-    } else {
-      summary.addAll(round);
+      return round;
     }
 
+    summary.addAll(round);
     return summary;
+
+
   }
+
+  @Override
+  public void saveGameSummary(List<SummaryRound> previousRounds, String totalRounds) {
+
+    Map<SummaryRound, Long> ocurrencias = previousRounds.stream()
+        .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+    this.gameSummary.setTotalWinsOnePlayer(
+        ocurrencias.entrySet().stream().filter(s -> CTE_PLAYER_1.equals(s.getKey().getName()))
+            .findFirst().map(Map.Entry::getValue).orElse((long) 0));
+    this.gameSummary.setTotalWinsSecondPlayer(
+        ocurrencias.entrySet().stream().filter(s -> CTE_PLAYER_2.equals(s.getKey().getName()))
+            .findFirst().map(Map.Entry::getValue).orElse((long) 0));
+    this.gameSummary.setTotalDraws(
+        ocurrencias.entrySet().stream().filter(s -> CTE_TIE.equals(s.getKey().getName()))
+            .findFirst().map(Map.Entry::getValue).orElse((long) 0));
+    this.gameSummary
+        .setTotalRounds(this.gameSummary.getTotalRounds() + Integer.valueOf(totalRounds));
+
+  }
+
+  @Override
+  public GameSummary getSummary() {
+    return this.gameSummary;
+  }
+
 
 }
