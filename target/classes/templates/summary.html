@@ -3,9 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <title>LOTTOLAND</title>
-
-<link th:rel="stylesheet"
-	th:href="@{webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} " />
+ <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
 </head>
 <body>
 
@@ -21,17 +19,15 @@
 		</div>
 	</nav>
 
-	<div class="container">
-		<div class="row">
-			<div class="col-2">
-				<a class="btn btn-primary" th:href="@{/index/play}">¡Return Play!</a>
-			</div>
-		</div>
-	</div>
 
 	<div class="container">
-		<span th:if="${#session.getAttribute('gameSummary') != null}"></span>
-		<div class="row col-md-7 table-responsive">
+		<div  class="row mt-5">
+			<div class="col-2">
+				<a class="btn btn-primary" th:href="@{/index/play}">¡Return
+					Play!</a>
+			</div>
+		</div>
+		<div class="mt-5 row col-md-7 table-responsive">
 			<h1>Summary</h1>
 			<table id="customerTable" class="table">
 				<thead>
@@ -53,6 +49,7 @@
 			</table>
 		</div>
 	</div>
+
 	<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
 	<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
 	<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>

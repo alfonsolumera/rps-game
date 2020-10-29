@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>LOTTOLAND</title>
+<link href="../static/css/bootstrap.css" rel="stylesheet"
+	th:href="@{/css/bootstrap.css}" />
+</head>
+<body>
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+		<div class="container">
+			<a class="navbar-brand" href="/">Rock, Paper, Scissors </a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarResponsive" aria-controls="navbarResponsive"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		</div>
+	</nav>
+	<div class="container">
+		<div class="mt-5 row col-md-7 table-responsive">
+			<h1>¡¡¡ UPS .. Algo Fallo !!!</h1>
+
+			<table id="customerTable" class="table">
+
+				<tr>
+					<td>Date</td>
+					<td th:text="${timestamp}" />
+				</tr>
+				<tr>
+					<td>Path</td>
+					<td th:text="${path}" />
+				</tr>
+				<tr>
+					<td>Error</td>
+					<td th:text="${error}" />
+				</tr>
+				<tr>
+					<td>Status</td>
+					<td th:text="${status}" />
+				</tr>
+				<tr>
+					<td>Message</td>
+					<td th:text="${message}" />
+				</tr>
+				<tr>
+					<td>Exception</td>
+					<td th:text="${exception}" />
+				</tr>
+
+			</table>
+		</div>
+	</div>
+</body>
+</html>

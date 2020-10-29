@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 @SuppressWarnings("unchecked")
 public class MenuController {
 
+
   @Autowired
   GameService gameService;
 
@@ -37,7 +38,7 @@ public class MenuController {
 
     request.getSession().setAttribute("roundsPlayed", String.valueOf(currentRound));
     request.getSession().setAttribute("rounds", lstScored);
-    return "redirect:/";
+    return "index";
 
   }
 
@@ -50,7 +51,7 @@ public class MenuController {
     request.getSession().setAttribute("rounds", new ArrayList<SummaryRound>());
     request.getSession().setAttribute("roundsPlayed", "0");
 
-    return "redirect:/";
+    return "index";
 
   }
 

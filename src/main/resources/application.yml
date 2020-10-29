@@ -1,0 +1,23 @@
+project:
+  artifactId: '@project.artifactId@'
+  appName: '@appName@'
+  name: '@project.name@'
+  version: '@project.version@'
+  description: '@project.description@'
+  groupId: '@project.groupId@'
+  
+spring:
+  application:
+    name: ${project.artifactId}
+  thymeleaf :
+    cache : false
+
+server:
+  port: 8080
+  error:
+    include-stacktrace : always
+
+logging:
+  level:
+    org:
+      springframework: INFO

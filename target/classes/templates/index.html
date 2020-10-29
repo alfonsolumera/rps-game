@@ -3,9 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <title>LOTTOLAND</title>
-
-<link th:rel="stylesheet"
-	th:href="@{webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} " />
+ <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
 </head>
 <body>
 
@@ -21,10 +19,9 @@
 		</div>
 	</nav>
 
+
 	<div class="container">
-	<p
-				th:text="'Rounds played: ' + ${#session.getAttribute('roundsPlayed')}"></p>
-		<div class="row">
+		<div class="row mt-5">
 			<div class="col-2">
 				<a class="btn btn-primary" th:href="@{/index/play}">¡Play!</a>
 			</div>
@@ -32,18 +29,17 @@
 				<a class="btn btn-primary" th:href="@{/index/game-summary}">Summary</a>
 			</div>
 			<div class="col-2">
-				<a class="btn btn-primary" th:href="@{/index/reset}">¡RESET!</a>
+				<a class="btn btn-primary" th:href="@{/index/reset}">Save/Reset</a>
 			</div>
-			
 		</div>
-	</div>
-
-	<div class="container">
+		<h4 class="mt-5"
+			th:text="'Rounds played: ' + ${#session.getAttribute('roundsPlayed')}"></h4>
+		
 		<form method="post" th:action="@{/}" th:object="${rounds}"
 			class="mt-5">
 			<span th:if="${#session.getAttribute('rounds') != null}"></span>
 			<div class="row col-md-7 table-responsive">
-				<h1>Summary</h1>
+				<h1>Game</h1>
 				<table id="customerTable" class="table">
 					<thead>
 						<tr>
