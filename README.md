@@ -19,3 +19,5 @@ o	Total Wins for second players
 o	Total draws
 •	These totals should consider all the rounds of all the games played by all users. (even if we clicked in "Restart button", these games should be considered as well)
 •	Don't use database, just keep the information you need in memory.
+
+a ver si funcionas
